@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoMeter: Pitch Deck untuk Kompetisi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
+            background-color: #0A0A0A;
+        }
+        .section {
+            padding: 6rem 1.5rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+        @media (min-width: 1024px) { .section { padding: 8rem 2rem; } }
+        
+        .gradient-text {
+            background: linear-gradient(45deg, #10B981, #2dd4bf, #93fcec);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% 200%;
+            animation: gradient-animation 5s ease infinite;
+        }
+        @keyframes gradient-animation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .hero-bg {
+            background-color: #050e0a;
+            background-image: url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?q=80&w=2671&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
+        }
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle, rgba(10, 10, 10, 0.2) 0%, rgba(10, 10, 10, 0.9) 80%);
+            z-index: 1;
+        }
+        .content-wrapper { position: relative; z-index: 2; }
+        
+        .nav-link { position: relative; transition: color 0.3s ease; }
+        .nav-link::after {
+            content: ''; position: absolute; width: 0; height: 2px;
+            bottom: -4px; left: 50%; transform: translateX(-50%);
+            background-color: #10B981; transition: width 0.3s ease;
+        }
+        .nav-link:hover { color: #2dd4bf; }
+        .nav-link:hover::after { width: 100%; }
+        
+        #ecometer-canvas { width: 100%; height: 450px; cursor: grab; }
+        .fade-in-up {
+            opacity: 0; transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-in-up.visible { opacity: 1; transform: translateY(0); }
+        .chart-bar { transition: width 1.5s ease-out; }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-200">
+
+    <header class="bg-black/30 backdrop-blur-lg fixed top-0 left-0 right-0 z-50 border-b border-gray-800">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#home" class="flex items-center space-x-3">
+                <svg class="w-8 h-8 text-teal-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                <h1 class="text-2xl font-extrabold text-white">EcoMeter</h1>
+            </a>
+            <nav class="hidden md:flex space-x-10">
+                <a href="#masalah" class="nav-link text-gray-300 font-semibold">Masalah</a>
+                <a href="#solusi" class="nav-link text-gray-300 font-semibold">Solusi</a>
+                <a href="#strategi" class="nav-link text-gray-300 font-semibold">Strategi Pasar</a>
+                <a href="#cta" class="nav-link text-gray-300 font-semibold">Aksi</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Home Section -->
+        <section id="home" class="section hero-bg">
+            <div class="content-wrapper container mx-auto text-center">
+                <div class="max-w-4xl mx-auto">
+                    <p class="fade-in-up text-teal-400 font-semibold mb-4" style="transition-delay: 100ms;">EcoMeter Pitch Deck</p>
+                    <h1 class="fade-in-up text-5xl md:text-7xl font-extrabold mb-6 text-white leading-tight" style="transition-delay: 200ms;">
+                        Mengubah Data Menjadi <span class="gradient-text">Penghematan Nyata</span>
+                    </h1>
+                    <p class="fade-in-up text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-10" style="transition-delay: 350ms;">
+                        Platform cerdas untuk mengidentifikasi pemborosan, mengoptimalkan konsumsi, dan memberdayakan masa depan energi yang berkelanjutan.
+                    </p>
+                    <a href="#masalah" class="fade-in-up bg-teal-500 text-white font-bold py-4 px-10 rounded-full hover:bg-teal-600 transition-all transform hover:scale-105 shadow-2xl shadow-teal-500/20 text-lg" style="transition-delay: 500ms;">
+                        Mulai Presentasi
+                    </a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Problem Section -->
+        <section id="masalah" class="section bg-black">
+            <div class="container mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="fade-in-up text-4xl md:text-5xl font-extrabold text-white">Biaya Tak Terlihat dari Kebutaan Energi</h2>
+                    <p class="fade-in-up text-lg text-gray-400 mt-4 max-w-3xl mx-auto" style="transition-delay: 150ms;">Masalah ini nyata, mendesak, dan menciptakan peluang pasar yang jelas. Inilah mengapa EcoMeter ada.</p>
+                </div>
+                <div class="grid lg:grid-cols-5 gap-8 items-center">
+                    <div class="lg:col-span-2 fade-in-up space-y-6" style="transition-delay: 300ms;">
+                         <div>
+                            <h3 class="text-xl font-bold text-white mb-2">1. Beban Finansial Konstan</h3>
+                            <p class="text-gray-400">Dengan tarif listrik <span class="font-bold text-teal-400">~Rp 1.444/kWh</span>, daya siaga dari perangkat yang "tidak aktif" dapat memboroskan ratusan ribu rupiah per tahun.</p>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-2">2. Ketidaktahuan = Pemborosan</h3>
+                            <p class="text-gray-400">Tanpa data, mustahil melakukan optimisasi. Konsumen dan bisnis tidak tahu perangkat mana yang boros, membuat penghematan tidak efektif.</p>
+                        </div>
+                         <div>
+                            <h3 class="text-xl font-bold text-white mb-2">3. Peluang Pasar Mendesak</h3>
+                            <p class="text-gray-400">Pasar smart home di Asia Pasifik tumbuh pesat, menandakan permintaan kuat untuk teknologi yang memberikan kontrol dan efisiensi, sejalan dengan target emisi nasional.</p>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-3 fade-in-up bg-gray-900/50 p-6 sm:p-8 rounded-2xl border border-gray-800" style="transition-delay: 450ms;">
+                        <h3 class="text-xl font-bold text-white mb-4 text-center">Distribusi Konsumsi Listrik Rumah Tangga</h3>
+                        <div id="energy-chart" class="space-y-4 text-sm">
+                            <div class="flex items-center gap-4"><span class="w-28 text-right text-gray-400">Pendingin Udara</span><div class="w-full bg-gray-700 rounded-full h-6"><div class="chart-bar bg-gradient-to-r from-teal-500 to-cyan-500 h-6 rounded-full flex items-center justify-end pr-2" data-width="45%"><span class="font-bold text-white">45%</span></div></div></div>
+                             <div class="flex items-center gap-4"><span class="w-28 text-right text-gray-400">Kulkas</span><div class="w-full bg-gray-700 rounded-full h-6"><div class="chart-bar bg-gradient-to-r from-cyan-500 to-sky-500 h-6 rounded-full flex items-center justify-end pr-2" data-width="20%"><span class="font-bold text-white">20%</span></div></div></div>
+                             <div class="flex items-center gap-4"><span class="w-28 text-right text-gray-400">Pencahayaan</span><div class="w-full bg-gray-700 rounded-full h-6"><div class="chart-bar bg-gradient-to-r from-sky-500 to-blue-500 h-6 rounded-full flex items-center justify-end pr-2" data-width="12%"><span class="font-bold text-white">12%</span></div></div></div>
+                             <div class="flex items-center gap-4"><span class="w-28 text-right text-gray-400">Elektronik</span><div class="w-full bg-gray-700 rounded-full h-6"><div class="chart-bar bg-gradient-to-r from-blue-500 to-indigo-500 h-6 rounded-full flex items-center justify-end pr-2" data-width="15%"><span class="font-bold text-white">15%</span></div></div></div>
+                             <div class="flex items-center gap-4"><span class="w-28 text-right text-gray-400">Lain-lain</span><div class="w-full bg-gray-700 rounded-full h-6"><div class="chart-bar bg-gradient-to-r from-indigo-500 to-violet-500 h-6 rounded-full flex items-center justify-end pr-2" data-width="8%"><span class="font-bold text-white">8%</span></div></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Solution Section with Exploded View -->
+        <section id="solusi" class="section bg-gray-900 text-white">
+             <div class="container mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="fade-in-up text-4xl md:text-5xl font-extrabold">Anatomi Solusi Cerdas Kami</h2>
+                    <p class="fade-in-up text-lg text-gray-400 mt-4 max-w-3xl mx-auto" style="transition-delay: 150ms;">Lihat lebih dekat bagaimana komponen-komponen pilihan kami bekerja sama untuk memberikan data dan penghematan.</p>
+                </div>
+                <div id="ecometer-canvas-container" class="fade-in-up bg-gray-800/20 rounded-2xl p-4 border border-gray-700 backdrop-blur-sm" style="transition-delay: 300ms;">
+                    <canvas id="ecometer-canvas"></canvas>
+                </div>
+                <div class="fade-in-up text-center mt-6" style="transition-delay: 450ms;">
+                    <button id="toggle-view-btn" class="bg-teal-500 text-white font-bold py-3 px-8 rounded-full hover:bg-teal-600 transition-all transform hover:scale-105 shadow-lg shadow-teal-500/20">
+                        Lihat Komponen
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Strategy Section -->
+        <section id="strategi" class="section bg-black text-white">
+            <div class="container mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="fade-in-up text-4xl md:text-5xl font-extrabold">Strategi Masuk Pasar Multi-Segmen</h2>
+                    <p class="fade-in-up text-lg text-gray-400 mt-4 max-w-3xl mx-auto" style="transition-delay: 150ms;">
+                        Kami akan menembus pasar melalui tiga jalur strategis yang dirancang untuk validasi, pertumbuhan, dan skala. Klik untuk melihat detail.
+                    </p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Cards will be here, with pop-up functionality -->
+                    <div class="fade-in-up bg-gray-900/50 border-2 border-sky-500/30 p-8 rounded-2xl flex flex-col text-center" style="transition-delay: 300ms;">
+                        <h3 class="text-2xl font-bold mb-3 text-sky-400">B2G (Pemerintah)</h3>
+                        <p class="font-bold text-white text-lg mb-4">Fase 1: Validasi</p>
+                        <p class="text-gray-400 mb-6 flex-grow">Membangun kredibilitas dan studi kasus melalui pilot project dengan institusi pemerintah.</p>
+                        <button data-strategy="b2g" class="open-modal-btn mt-auto bg-sky-500/20 text-sky-300 font-bold py-2 px-4 rounded-full hover:bg-sky-500/40 transition-colors">Lihat Detail Strategi</button>
+                    </div>
+                    <div class="fade-in-up bg-gray-900/50 border-2 border-teal-500/30 p-8 rounded-2xl flex flex-col text-center" style="transition-delay: 450ms;">
+                        <h3 class="text-2xl font-bold mb-3 text-teal-400">B2B (Bisnis)</h3>
+                        <p class="font-bold text-white text-lg mb-4">Fase 2: Pertumbuhan</p>
+                        <p class="text-gray-400 mb-6 flex-grow">Menyasar UMKM yang sensitif biaya dengan penawaran bundling bernilai tambah tinggi.</p>
+                        <button data-strategy="b2b" class="open-modal-btn mt-auto bg-teal-500/20 text-teal-300 font-bold py-2 px-4 rounded-full hover:bg-teal-500/40 transition-colors">Lihat Detail Strategi</button>
+                    </div>
+                    <div class="fade-in-up bg-gray-900/50 border-2 border-green-500/30 p-8 rounded-2xl flex flex-col text-center" style="transition-delay: 600ms;">
+                        <h3 class="text-2xl font-bold mb-3 text-green-400">B2C (Konsumen)</h3>
+                        <p class="font-bold text-white text-lg mb-4">Fase 3: Skala</p>
+                        <p class="text-gray-400 mb-6 flex-grow">Menjangkau pasar massal melalui e-commerce dan kampanye edukasi digital yang viral.</p>
+                        <button data-strategy="b2c" class="open-modal-btn mt-auto bg-green-500/20 text-green-300 font-bold py-2 px-4 rounded-full hover:bg-green-500/40 transition-colors">Lihat Detail Strategi</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section id="cta" class="section bg-gray-900 text-white">
+            <div class="container mx-auto text-center">
+                 <h2 class="fade-in-up text-4xl md:text-5xl font-extrabold mb-4">Wujudkan Masa Depan Energi Bersama Kami</h2>
+                 <p class="fade-in-up text-lg text-gray-400 mt-4 max-w-3xl mx-auto" style="transition-delay: 150ms;">EcoMeter bukan hanya produk; ini adalah investasi pada efisiensi, keberlanjutan, dan profitabilitas. Kami mengundang Anda untuk menjadi bagian dari perjalanan ini.</p>
+                <div class="fade-in-up bg-white/5 p-8 md:p-12 rounded-3xl backdrop-blur-lg border border-white/10 max-w-2xl mx-auto mt-12" style="transition-delay: 300ms;">
+                    <h3 class="text-3xl font-bold mb-4 text-center">Siap untuk Tanya Jawab</h3>
+                    <p class="text-center text-gray-300 mb-6">Sebagai bagian dari kesiapan, kami telah mengantisipasi pertanyaan Anda. Silakan uji kami.</p>
+                    <div class="relative">
+                        <input id="questionInput" type="text" class="w-full p-4 pr-16 bg-gray-800 border border-gray-700 rounded-full focus:ring-2 focus:ring-teal-400 focus:border-teal-400 text-white" placeholder="Contoh: Apa keunggulan kompetitif utama Anda?">
+                         <button id="askQuestionButton" class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-teal-500 text-white h-10 w-10 rounded-full hover:bg-teal-600 transition-all flex items-center justify-center">
+                           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                         </button>
+                    </div>
+                    <div id="answerResult" class="mt-6 p-4 bg-black/20 rounded-lg min-h-[100px] text-gray-200 whitespace-pre-wrap text-left"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal Pop-up -->
+    <div id="strategy-modal" class="hidden pointer-events-none fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div class="fixed inset-0 bg-black/70 backdrop-blur-sm" id="modal-overlay"></div>
+        <div class="relative bg-gray-900 border border-gray-700 rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto p-8" id="modal-content">
+            <button id="close-modal-btn" class="absolute top-4 right-4 text-gray-500 hover:text-white">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <h2 id="modal-title" class="text-3xl font-bold mb-4"></h2>
+            <div id="modal-body" class="space-y-6"></div>
+        </div>
+    </div>
+
+<script type="importmap">
+    { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.module.js", "OrbitControls": "https://cdn.jsdelivr.net/npm/three@0.128.0/examples/jsm/controls/OrbitControls.js", "gsap": "https://cdn.jsdelivr.net/npm/gsap@3.12.2/index.js" } }
+</script>
+
+<script type="module">
+    // --- Animation on Scroll ---
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                if (entry.target.id === 'energy-chart') animateChart();
+            }
+        });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+    const chart = document.getElementById('energy-chart');
+    if(chart) observer.observe(chart);
+    function animateChart() {
+        document.querySelectorAll('.chart-bar').forEach(bar => {
+            bar.style.width = bar.getAttribute('data-width');
+        });
+    }
+
+    // --- 3D Model with Exploded View ---
+    import * as THREE from 'three';
+    import { OrbitControls } from 'OrbitControls';
+    import { gsap } from 'gsap';
+
+    const canvasContainer = document.getElementById('ecometer-canvas-container');
+    const canvas = document.getElementById('ecometer-canvas');
+    const toggleBtn = document.getElementById('toggle-view-btn');
+    let isExploded = false;
+    let components = {};
+
+    if (canvasContainer && canvas && toggleBtn) {
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(50, canvasContainer.clientWidth / 450, 0.1, 1000);
+        camera.position.set(6, 5, 9);
+        const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+        
+        const controls = new OrbitControls(camera, renderer.domElement);
+        Object.assign(controls, { enableDamping: true, dampingFactor: 0.05, enableZoom: true, autoRotate: true, autoRotateSpeed: 1.0, maxPolarAngle: Math.PI / 1.5, minPolarAngle: Math.PI / 4 });
+
+        scene.add(new THREE.AmbientLight(0xffffff, 0.9));
+        const dirLight = new THREE.DirectionalLight(0xffffff, 1.5);
+        dirLight.position.set(8, 12, 10);
+        scene.add(dirLight);
+
+        const group = new THREE.Group();
+        scene.add(group);
+        
+        const caseMat = new THREE.MeshStandardMaterial({ color: 0xf8f8f8, roughness: 0.3, metalness: 0.1 });
+        const pcbMat = new THREE.MeshStandardMaterial({color: 0x013220});
+        
+        const pcb = new THREE.Mesh(new THREE.BoxGeometry(5.8, 0.1, 3.5), pcbMat);
+        components.pcb = pcb;
+
+        const arduinoGroup = new THREE.Mesh(new THREE.BoxGeometry(1.2, 0.2, 2.5), new THREE.MeshStandardMaterial({color: 0x005F73}));
+        components.arduino = arduinoGroup;
+
+        const espGroup = new THREE.Mesh(new THREE.BoxGeometry(0.8, 0.2, 1), new THREE.MeshStandardMaterial({color: 0x111111}));
+        components.esp8266 = espGroup;
+        
+        const sensorGroup = new THREE.Mesh(new THREE.BoxGeometry(0.8, 0.2, 1.2), new THREE.MeshStandardMaterial({color: 0x007f5f}));
+        components.sensor = sensorGroup;
+
+        const relayGroup = new THREE.Mesh(new THREE.BoxGeometry(0.8, 0.6, 1), new THREE.MeshStandardMaterial({color: 0x0077B6}));
+        components.relay = relayGroup;
+        
+        const lcdScreen = new THREE.Mesh(new THREE.BoxGeometry(2.8, 1.0, 0.2), new THREE.MeshStandardMaterial({color: 0x1d3557}));
+        lcdScreen.add(new THREE.Mesh(new THREE.PlaneGeometry(2.6, 0.8), new THREE.MeshBasicMaterial({color: 0x90e0ef})));
+        components.lcd = lcdScreen;
+
+        const casingGroup = new THREE.Group();
+        const verticalGeo = new THREE.BoxGeometry(3.2, 4.0, 2.8);
+        const horizontalGeo = new THREE.BoxGeometry(7.0, 2.5, 2.8);
+        const verticalMesh = new THREE.Mesh(verticalGeo, caseMat);
+        const horizontalMesh = new THREE.Mesh(horizontalGeo, caseMat);
+        horizontalMesh.position.y = -0.75;
+        casingGroup.add(verticalMesh, horizontalMesh);
+        
+        const socketHoleGeo = new THREE.CylinderGeometry(0.35, 0.35, 0.2, 16);
+        const socketHoleMat = new THREE.MeshBasicMaterial({color: 0x222222});
+        
+        const leftSocket1 = new THREE.Mesh(socketHoleGeo, socketHoleMat);
+        leftSocket1.rotation.z = Math.PI/2;
+        leftSocket1.position.set(-3.49, -0.25, 0);
+        const leftSocket2 = leftSocket1.clone();
+        leftSocket2.position.y = -1.25;
+        casingGroup.add(leftSocket1, leftSocket2);
+
+        const rightSocket1 = new THREE.Mesh(socketHoleGeo, socketHoleMat);
+        rightSocket1.rotation.z = Math.PI/2;
+        rightSocket1.position.set(3.49, -0.25, 0);
+        const rightSocket2 = rightSocket1.clone();
+        rightSocket2.position.y = -1.25;
+        casingGroup.add(rightSocket1, rightSocket2);
+
+        const prongMat = new THREE.MeshStandardMaterial({ color: 0xcccccc, metalness: 0.9, roughness: 0.3});
+        const prongGeo = new THREE.CylinderGeometry(0.2, 0.2, 1.2, 16);
+        const prong1 = new THREE.Mesh(prongGeo, prongMat);
+        prong1.position.set(-0.7, 2.5, 0);
+        const prong2 = prong1.clone();
+        prong2.position.x = 0.7;
+        casingGroup.add(prong1, prong2);
+        
+        components.casing = casingGroup;
+
+        const assembledPositions = {
+            casing: {x: 0, y: 0, z: 0},
+            pcb: { x: 0, y: 0, z: -0.1 },
+            arduino: { x: -1.8, y: 0.5, z: 0 },
+            esp8266: { x: -1.8, y: -0.8, z: 0 },
+            sensor: { x: 1.8, y: 0.5, z: 0},
+            relay: { x: 1.8, y: -0.8, z: 0},
+            lcd: { x: 0, y: 1.5, z: 1.45}
+        };
+
+        const explodedPositions = {
+            casing: { x: 0, y: 0, z: -7 },
+            pcb: { x: 0, y: 0, z: 0 },
+            arduino: { x: -5.5, y: 1, z: 0 },
+            esp8266: { x: -5.5, y: -1, z: 0},
+            sensor: {x: 5.5, y: 1, z: 0},
+            relay: {x: 5.5, y: -1, z: 0},
+            lcd: {x: 0, y: 4.5, z: 2}
+        };
+
+        function createLabel(text, position) {
+             const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+            const fontSize = 64;
+            context.font = `Bold ${fontSize}px Plus Jakarta Sans`;
+            const textWidth = context.measureText(text).width;
+            canvas.width = textWidth;
+            canvas.height = fontSize + 10;
+            context.font = `Bold ${fontSize}px Plus Jakarta Sans`;
+            context.fillStyle = 'rgba(255, 255, 255, 0.95)';
+            context.fillText(text, 0, fontSize);
+            const texture = new THREE.CanvasTexture(canvas);
+            const spriteMaterial = new THREE.SpriteMaterial({ map: texture, transparent: true, depthTest: false });
+            const sprite = new THREE.Sprite(spriteMaterial);
+            sprite.scale.set(textWidth/150, (fontSize+10)/150, 1.0);
+            sprite.position.copy(position);
+            sprite.visible = false;
+            return sprite;
+        }
+
+        Object.keys(components).forEach(key => {
+            const obj = components[key];
+            obj.position.set(assembledPositions[key].x, assembledPositions[key].y, assembledPositions[key].z);
+            group.add(obj);
+
+            let labelText = '';
+            let labelPos = explodedPositions[key];
+            switch(key) {
+                case 'pcb': labelText = 'Main PCB'; labelPos.y += 0.5; break;
+                case 'arduino': labelText = 'Arduino Nano'; labelPos.y += 0.5; break;
+                case 'esp8266': labelText = 'ESP8266'; labelPos.y += 0.5; break;
+                case 'sensor': labelText = 'ACS712 Sensor'; labelPos.y += 0.5; break;
+                case 'relay': labelText = 'Relay'; labelPos.y += 0.5; break;
+                case 'lcd': labelText = 'LCD Display'; labelPos.y += 0.5; break;
+            }
+            if(labelText) {
+                const label = createLabel(labelText, labelPos);
+                obj.label = label;
+                group.add(label);
+            }
+        });
+        
+        toggleBtn.addEventListener('click', () => {
+            isExploded = !isExploded;
+            controls.autoRotate = !isExploded;
+            
+            gsap.to(camera.position, { z: isExploded ? 15 : 9, duration: 1.5, ease: "power3.inOut" });
+
+            Object.keys(components).forEach(key => {
+                const targetPos = isExploded ? explodedPositions[key] : assembledPositions[key];
+                gsap.to(components[key].position, {
+                    x: targetPos.x, y: targetPos.y, z: targetPos.z,
+                    duration: 1.5, ease: "power3.inOut"
+                });
+
+                if (components[key].label) {
+                    gsap.to(components[key].label, {
+                        duration: 0.5, visible: isExploded, delay: isExploded ? 0.8 : 0,
+                    });
+                }
+            });
+
+            toggleBtn.textContent = isExploded ? 'Lihat Produk Utuh' : 'Lihat Komponen';
+        });
+
+        const animate = () => { requestAnimationFrame(animate); controls.update(); renderer.render(scene, camera); };
+        animate();
+        
+        const onResize = () => {
+            if (!canvasContainer) return;
+            const { clientWidth } = canvasContainer;
+            camera.aspect = clientWidth / 450;
+            camera.updateProjectionMatrix();
+            renderer.setSize(clientWidth, 450);
+        };
+        window.addEventListener('resize', onResize);
+        onResize();
+    }
+    
+    // --- Modal Logic ---
+    const strategyData = {
+        b2g: {
+            title: "Strategi B2G: Menjadi Mitra Kota Cerdas",
+            color: "text-sky-400",
+            content: `<p><strong>Kondisi Pasar:</strong> Proses pengadaan pemerintah (LPSE/LKPP) membutuhkan syarat administratif dan waktu tender yang panjang, menjadi tantangan bagi produk di tahap awal seperti EcoMeter.</p> <p><strong>Strategi Aksi:</strong> Mengajukan kerja sama pilot project (uji coba non-komersial) melalui MoU dengan Dinas Lingkungan Hidup, Bappeda, atau Kominfo DKI Jakarta untuk 35 gedung pemerintahan.</p> <p><strong>Alasan:</strong> Pemerintah membuka ruang untuk uji coba teknologi inovatif, pilot project memberikan bukti nyata manfaat, dan membangun kredibilitas untuk pengadaan skala besar.</p> <div class="bg-gray-800 p-4 rounded-lg border border-gray-700 text-sm mt-4"> <h5 class="font-bold text-center mb-2">Proyeksi Keuntungan Pilot Project</h5> <div class="flex justify-between"><span>Pendapatan:</span><span class="font-mono text-green-400">Rp 52.500.000</span></div> <div class="flex justify-between"><span>Total Biaya:</span><span class="font-mono text-red-400">(Rp 43.000.000)</span></div> <hr class="my-2 border-gray-600"> <div class="flex justify-between font-bold text-base"><span>Estimasi Laba Bersih:</span><span class="font-mono text-green-400">Rp 9.500.000</span></div> </div>`
+        },
+        b2b: {
+            title: "Strategi B2B: Memberdayakan UMKM",
+            color: "text-teal-400",
+            content: `<p><strong>Kondisi Pasar:</strong> Banyak pelaku usaha kecil (cafe, laundry, kosan) boros listrik karena tidak tahu detail penggunaan alatnya dan sangat sensitif terhadap biaya operasional.</p> <p><strong>Strategi Aksi:</strong> Menawarkan EcoMeter dalam bentuk paket bundling hemat (3-5 unit per usaha), dilengkapi pelatihan singkat dan analisis konsumsi gratis selama 1 bulan pertama.</p> <p><strong>Alasan:</strong> Model bundling meningkatkan volume pembelian, memberikan solusi konkret yang menekan biaya, dan menciptakan kepercayaan untuk peluang upsell di masa depan.</p> <div class="bg-gray-800 p-4 rounded-lg border border-gray-700 text-sm mt-4"> <h5 class="font-bold text-center mb-2">Proyeksi Keuntungan (per 400 unit)</h5> <div class="flex justify-between"><span>Pendapatan:</span><span class="font-mono text-green-400">Rp 60.000.000</span></div> <div class="flex justify-between"><span>Total Biaya:</span><span class="font-mono text-red-400">(Rp 42.000.000)</span></div> <hr class="my-2 border-gray-600"> <div class="flex justify-between font-bold text-base"><span>Estimasi Laba Bersih:</span><span class="font-mono text-green-400">Rp 18.000.000</span></div> </div>`
+        },
+        b2c: {
+            title: "Strategi B2C: Menjangkau Rumah Tangga",
+            color: "text-green-400",
+            content: `<p><strong>Kondisi Pasar:</strong> Masyarakat awam belum mengenal manfaat alat monitoring energi dan hanya tahu total tagihan bulanan.</p> <p><strong>Strategi Aksi:</strong> Distribusi melalui marketplace (Tokopedia, Shopee) dengan dukungan konten edukatif di media sosial (Reels, TikTok) dengan kampanye “Hemat Tagihan – Hemat Bumi”.</p> <p><strong>Alasan:</strong> Marketplace memberikan kemudahan transaksi dan ulasan, konten video pendek menjangkau audiens besar dengan biaya rendah, dan menyasar target demografis (25-40 tahun) yang tepat.</p> <div class="bg-gray-800 p-4 rounded-lg border border-gray-700 text-sm mt-4"> <h5 class="font-bold text-center mb-2">Proyeksi Keuntungan (per 300 unit)</h5> <div class="flex justify-between"><span>Pendapatan:</span><span class="font-mono text-green-400">Rp 45.000.000</span></div> <div class="flex justify-between"><span>Total Biaya:</span><span class="font-mono text-red-400">(Rp 32.000.000)</span></div> <hr class="my-2 border-gray-600"> <div class="flex justify-between font-bold text-base"><span>Estimasi Laba Bersih:</span><span class="font-mono text-green-400">Rp 13.000.000</span></div> </div>`
+        }
+    };
+    
+    const modal = document.getElementById('strategy-modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalBody = document.getElementById('modal-body');
+    const openModalButtons = document.querySelectorAll('.open-modal-btn');
+    const closeModalBtn = document.getElementById('close-modal-btn');
+    const modalOverlay = document.getElementById('modal-overlay');
+
+    function showModal(strategyKey) {
+        const data = strategyData[strategyKey];
+        if (!data) return;
+        modalTitle.textContent = data.title;
+        modalTitle.className = `text-3xl font-bold mb-4 ${data.color}`;
+        modalBody.innerHTML = data.content;
+        modal.classList.remove('hidden', 'pointer-events-none');
+    }
+
+    function hideModal() {
+        modal.classList.add('hidden', 'pointer-events-none');
+    }
+
+    openModalButtons.forEach(btn => btn.addEventListener('click', (e) => showModal(e.target.dataset.strategy)));
+    closeModalBtn.addEventListener('click', hideModal);
+    modalOverlay.addEventListener('click', hideModal);
+
+    // --- Q&A Logic ---
+    const askQuestionButton = document.getElementById('askQuestionButton');
+    const questionInput = document.getElementById('questionInput');
+    const answerResult = document.getElementById('answerResult');
+
+    async function callGemini(prompt) {
+        const apiKey = "AIzaSyAlsvDQvCUPtZ2auA__tjBGYL30dDezzpg"; 
+        if (apiKey === "AIzaSyAlsvDQvCUPtZ2auA__tjBGYL30dDezzpg") {
+            return "Fitur Tanya Jawab dinonaktifkan. Harap masukkan kunci API yang valid di dalam kode.";
+        }
+        
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+        const payload = { contents: [{ role: "user", parts: [{ text: prompt }] }] };
+        try {
+            const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+            if (!response.ok) throw new Error(`API request failed: ${response.status}`);
+            const result = await response.json();
+            return result.candidates?.[0]?.content?.parts?.[0]?.text || "Maaf, respons dari AI tidak terduga.";
+        } catch (error) {
+            console.error('Gemini API Error:', error);
+            return `Maaf, terjadi kesalahan koneksi.`;
+        }
+    }
+    
+    async function handleQuestion() {
+        if(!questionInput || !answerResult || !askQuestionButton) return;
+        const question = questionInput.value.trim();
+        if (!question) { answerResult.textContent = 'Silakan masukkan pertanyaan Anda.'; return; }
+        answerResult.textContent = 'Mencari jawaban...';
+        const context = `Konteks Bisnis EcoMeter: Produk IoT untuk monitoring energi, hemat 15-25%. Strategi pasar terbagi 3 fase: (1) Validasi via Pilot Project B2G, (2) Pertumbuhan via Bundling B2B, (3) Skala via E-commerce B2C. Setiap fase memiliki proyeksi keuntungan sendiri yang menunjukkan profitabilitas awal yang positif.`;
+        const prompt = `${context}\nJawab pertanyaan berikut dengan singkat, profesional, dan meyakinkan dalam Bahasa Indonesia, berdasarkan data yang tersedia: "${question}"`;
+        answerResult.textContent = await callGemini(prompt);
+        questionInput.value = '';
+    }
+
+    if (askQuestionButton) askQuestionButton.addEventListener('click', handleQuestion);
+    if (questionInput) questionInput.addEventListener('keypress', e => { if (e.key === 'Enter') { e.preventDefault(); handleQuestion(); } });
+
+</script>
+
+</body>
+</html>
